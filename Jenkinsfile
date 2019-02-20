@@ -3,6 +3,9 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
+                sh '''
+                echo "PATH = ${PATH}"
+                '''
                 echo "Initializing the code file"
             }
         }
