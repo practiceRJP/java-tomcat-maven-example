@@ -25,5 +25,29 @@ pipeline {
                 
             }
         }
+
+        stage ('Deploy Build in Production Area') {
+
+            steps {
+
+                timeout (time: 5, unit: 'Days') {
+                    input message: 'Approve PRODUCTION Deployment?'
+                }
+
+                build job : 'PipelineAsCode - Deploy_Artifact_to_Production_Area'
+                
+            }
+
+            post {
+                success {
+                    echo 'Deployment on PRODUCTION is Successful'
+                }
+
+                failure {
+                    echo 'Deployment Failure on PRODUCTION'
+                }
+            }
+            
+        }
     }
 }
