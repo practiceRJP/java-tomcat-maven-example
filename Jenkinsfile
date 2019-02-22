@@ -40,11 +40,11 @@ node {
 	} finally {
 		def currentResult = currentBuild.result ?: 'SUCCESS'
 		if (currentResult == 'UNSTABLE') {
-			echo "Fail on $JOB_NAME"
+			echo 'Fail on Production'
 		}
 
 		if (currentResult == 'SUCCESS') {
-			echo "Deploy on $JOB_NAME is Successful"
+			echo 'Deploy on PRODUCTION is Successful'
 		}
 	}
 }
