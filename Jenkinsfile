@@ -1,5 +1,5 @@
 node {
-    stages {
+    
 
         stage ('Build Servlet') {
 
@@ -56,5 +56,5 @@ node {
         }
         
         }
-    }
+    
 }
