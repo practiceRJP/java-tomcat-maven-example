@@ -59,3 +59,17 @@ Pipeline {
         }
     }
 }
+
+/*
+From: https://jenkins.io/doc/book/pipeline/jenkinsfile/
+
+node {
+  
+    stage('Deploy') {
+        if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
+            sh 'make publish'
+        }
+    }
+  
+}
+*/
