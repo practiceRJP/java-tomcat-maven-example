@@ -1,6 +1,6 @@
 node {
 
-    node {
+    
     try {
         stage('Test') {
             sh 'echo "Fail!"; exit 1'
@@ -26,7 +26,7 @@ node {
 
         echo 'This will always run'
     }
-}
+
     
 /*
         stage ('Build Servlet') {
