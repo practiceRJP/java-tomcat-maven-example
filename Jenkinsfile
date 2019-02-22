@@ -1,4 +1,4 @@
-pipeline {
+node {
     agent any
     stages {
 
@@ -48,6 +48,16 @@ pipeline {
                 }
             }
             
+        stage ('Example') {
+            try {
+                sh 'exit 1'
+            }
+            catch (exc) {
+                echo 'Something failed'
+                throw
+            }
+        }
+        
         }
     }
 }
