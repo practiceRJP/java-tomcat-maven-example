@@ -1,6 +1,8 @@
 node {
 	try {
-		stage('Build Servlet') { sh 'mvn clean package' }
+		stage('Build Servlet') { 
+            checkout scm
+            sh 'mvn clean package' }
 	} catch (e) {
 		echo 'This will run only if failed'
 
