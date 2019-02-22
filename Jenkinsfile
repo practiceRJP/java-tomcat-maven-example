@@ -48,13 +48,11 @@ node {
                 }
             }
             
-        stage ('Example') {
-            try {
-                sh 'exit 1'
-            }
-            catch (exc) {
-                echo 'Something failed'
-                throw
+        stage('Example') {
+            if (env.BRANCH_NAME == 'master') {
+                echo 'I only execute on the master branch'
+            } else {
+                echo 'I execute elsewhere'
             }
         }
         
