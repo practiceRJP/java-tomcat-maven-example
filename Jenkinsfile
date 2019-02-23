@@ -5,17 +5,17 @@ node {
             sh 'mvn clean package' 
         }
 	} catch (e) {
-		echo 'This will run only if failed'
+		echo 'Failed to build servlet'
 
 		throw e
 	} finally {
 		def currentResult = currentBuild.result ?: 'SUCCESS'
 		if (currentResult == 'UNSTABLE') {
-			echo 'This will run only if the run was marked as unstable'
+			echo 'Failed to build servlet'
 		}
 
 		if (currentResult == 'SUCCESS') {
-			echo 'Now archiving...'
+			echo 'Success! Now archiving...'
 			archiveArtifacts artifacts: '**/*.war'
 		}
 	}
@@ -24,9 +24,18 @@ node {
 		stage('Deploy Build in Staging Area') { build job : 'PipelineAsCode - Deploy_Artifact_to_Staging_Area' }
 	} catch (e) {
 
-		echo 'Fail on Staging'
+		echo 'Fail on STAGING'
 		throw e
-	}
+	} finally {
+        def currentResult = currentBuild.result ?: 'SUCCESS'
+		if (currentResult == 'UNSTABLE') {
+			echo 'Fail on STAGING'
+		}
+
+		if (currentResult == 'SUCCESS') {
+			echo 'Deploy on STAGING is Successful'
+		}
+    }
 
 	try {
 		stage ('Deploy Build in Production Area') {
@@ -40,7 +49,7 @@ node {
 	} finally {
 		def currentResult = currentBuild.result ?: 'SUCCESS'
 		if (currentResult == 'UNSTABLE') {
-			echo 'Fail on Production'
+			echo 'Fail on PRODUCTION'
 		}
 
 		if (currentResult == 'SUCCESS') {
